@@ -187,7 +187,10 @@ REST_FRAMEWORK = {
 }
 
 
-CORS_ALLOWED_ORIGINS = allowed_origins_env.split(",") if allowed_origins_env else []
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 CSRF_TRUSTED_ORIGINS = (
     csrf_trusted_origins_env.split(",") if csrf_trusted_origins_env else []
 )
