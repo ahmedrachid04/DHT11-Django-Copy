@@ -26,8 +26,8 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t dht-backend:${{ github.sha }} .
-          docker tag dht-backend:${{ github.sha }} anubus298/dht-backend:latest
+          docker tag dht-backend:${{ github.sha }} ahmedrachid04/dht-backend:latest
 
       - name: Push Docker image to DockerHub
         run: |
-          docker push anubus298/dht-backend:latest
+          docker push ahmedrachid04/dht-backend:latest
