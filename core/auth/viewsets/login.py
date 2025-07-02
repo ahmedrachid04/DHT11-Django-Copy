@@ -5,7 +5,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework import status
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from core.auth.serializers import LoginSerializer
-from rest_framework.exceptions import ValidationError
 
 
 class LoginViewSet(ViewSet):
@@ -14,13 +13,11 @@ class LoginViewSet(ViewSet):
     http_method_names = ["post"]
 
     def create(self, request, *args, **kwargs):
-    serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=request.data)
 
-    try:
-        serializer.is_valid(raise_exception=True)
-    except TokenError as e:
-        raise InvalidToken(e.args[0])
-    except ValidationError as ve:
-        return Response({"error": ve.detail}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except TokenError as e:
+            raise InvalidToken(e.args[0])
 
-    return Response({"data": serializer.validated_data}, status=status.HTTP_200_OK)
+        return Response({"data": serializer.validated_data}, status=status.HTTP_200_OK)
